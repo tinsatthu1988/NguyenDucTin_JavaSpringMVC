@@ -4,13 +4,99 @@
     <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
     <meta name="viewport" content="width=device-width,initial-scale=1.0, minimum-scale=1.0">
 
-    <title>Home - Shopme Admin</title>
+    <title>Home - BookShop Admin</title>
 
     <link rel="stylesheet" type="text/css" th:href="@{/webjars/bootstrap/css/bootstrap.min.css}" />
     <script type="text/javascript" th:src="@{/webjars/jquery/jquery.min.js}" ></script>
     <script type="text/javascript" th:src="@{/webjars/bootstrap/js/bootstrap.min.js}" ></script>
 </head>
 <body>
-  <h1>Welcome Book Manager</h1>
+<div class="container-fluid">
+    <div>
+        <nav class="navbar navbar-expand-lg bg-dark navbar-dark">
+            <a class="navbar-brand" th:href="@{/}">
+                <img th:src="@{/images/logo_bookshop.png}" style="width: 50px;"/>
+            </a>
+            <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#topNavbar">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="topNavbar">
+                <ul class="navbar-nav">
+                    <li class="nav-item">
+                        <a class="nav-link" th:href="@{/users}">Users</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" th:href="@{/categories}">Categories</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" th:href="@{/products}">Books</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" th:href="@{/customers}">Customers</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" th:href="@{/shipping}">Shipping</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" th:href="@{/orders}">Orders</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" th:href="@{/report}">Sales Report</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" th:href="@{/articles}">Reviews</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" th:href="@{/menus}">Menus</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" th:href="@{/settings}">Settings</a>
+                    </li>
+                </ul>
+            </div>
+
+        </nav>
+    </div>
+    <div class="text-center m-3">
+        <h1 class="display-4">Book Management System with Spring Boot MVC</h1>
+    </div>
+    <div class="jumbotron">
+        <h5>Learn about:</h5>
+        <ul>
+            <li>
+                <p>Spring Boot MVC</p>
+            </li>
+            <li>
+                <p>Hibernate Core</p>
+            </li>
+            <li>
+                <p>Spring Data JPA</p>
+            </li>
+            <li>
+                <p>Dependency Injection</p>
+            </li>
+            <li>
+                <p>Repository Pattern</p>
+            </li>
+            <li>
+                <p>Spring Security</p>
+            </li>
+            <li>
+                <p>Bootstrap 4 and Jquery 3.4</p>
+            </li>
+            <li>
+                <p>Hibernate Validation</p>
+            </li>
+            <li>
+                <p>My SQL Workbench</p>
+            </li>
+        </ul>
+    </div>
+
+    <div class="text-center">
+        <p>BookShop Control Panel - Copyright &copy; BookShop</p>
+    </div>
+
+</div>
 </body>
 </html>
