@@ -40,13 +40,13 @@
                 <a href="#"><i class="fas fa-home"></i><span class="nav-label">Home</span></a>
             </li>
             <li class="has-submenu">
-                <a th:href="@{/users}"><i class="fas fa-user-tie"></i></i> <span class="nav-label">Users</span></a>
+                <a href="@{/users}"><i class="fas fa-user-tie"></i></i> <span class="nav-label">Users</span></a>
             </li>
             <li class="has-submenu">
-                <a th:href="@{/categories}"><i class="fas fa-bars"></i> <span class="nav-label">Categories</span></a>
+                <a href="#"><i class="fas fa-bars"></i> <span class="nav-label">Categories</span></a>
             </li>
             <li class="has-submenu">
-                <a th:href="@{/books}"><i class="fas fa-book"></i> <span class="nav-label">Books</span></a>
+                <a href="#"><i class="fas fa-book"></i> <span class="nav-label">Books</span></a>
             </li>
         </ul>
     </nav>
@@ -66,42 +66,36 @@
 
 
     <div class="warper container-fluid">
-        <div class="text-center alert alert-dark">
-            <h1 class="display-4">Book Shop Website with Spring Boot MVC</h1>
+        <div>
+            <table class="table table-bordered table-striped table-hover table-responsive-xl">
+                <thead class="thead-dark">
+                <tr>
+                    <th>User ID</th>
+                    <th>Photos</th>
+                    <th>E-mail</th>
+                    <th>First Name</th>
+                    <th>Last Name</th>
+                    <th>Roles</th>
+                    <th>Enabled</th>
+                    <th></th>
+                </tr>
+                </thead>
+                <tbody>
+                <tr th:each="user : ${listUsers}">
+                    <td>[[${user.id}]]</td>
+                    <td></td>
+                    <td>[[${user.email}]]</td>
+                    <td>[[${user.firstName}]]</td>
+                    <td>[[${user.lastName}]]</td>
+                    <td>[[${user.roles}]]</td>
+                    <td>[[${user.enabled}]]</td>
+                    <td>
+                        Edit &nbsp; Delete
+                    </td>
+                </tr>
+                </tbody>
+            </table>
         </div>
-        <div class="jumbotron">
-            <h5>Learn about:</h5>
-            <ul>
-                <li>
-                    <p>Spring Boot MVC</p>
-                </li>
-                <li>
-                    <p>Spring Data JPA</p>
-                </li>
-                <li>
-                    <p>Hibernate Core</p>
-                </li>
-                <li>
-                    <p>Hibernate Validation</p>
-                </li>
-                <li>
-                    <p>Dependency Injection</p>
-                </li>
-                <li>
-                    <p>Repository Pattern</p>
-                </li>
-                <li>
-                    <p>Spring Security</p>
-                </li>
-                <li>
-                    <p>Bootstrap 4 and Jquery 3.4</p>
-                </li>
-                <li>
-                    <p>MySQL Workbench</p>
-                </li>
-            </ul>
-        </div>
-
     </div>
     <!-- Warper Ends Here (working area) -->
     <div style="height: 100px;">
