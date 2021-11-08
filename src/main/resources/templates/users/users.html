@@ -37,7 +37,7 @@
     <nav class="navigation">
         <ul class="list-unstyled">
             <li class="active">
-                <a href="#"><i class="fas fa-home"></i><span class="nav-label">Home</span></a>
+                <a th:href="@{/}"><i class="fas fa-home"></i><span class="nav-label">Home</span></a>
             </li>
             <li class="has-submenu">
                 <a href="@{/users}"><i class="fas fa-user-tie"></i></i> <span class="nav-label">Users</span></a>
@@ -66,6 +66,14 @@
 
 
     <div class="warper container-fluid">
+        <div>
+            <h2>Manage Users</h2>
+            <a th:href="@{/users/new}">Create New User</a>
+        </div>
+
+        <div th:if="${message != null}" class="alert alert-success text-center">
+            [[${message}]]
+        </div>
         <div>
             <table class="table table-bordered table-striped table-hover table-responsive-xl">
                 <thead class="thead-dark">
