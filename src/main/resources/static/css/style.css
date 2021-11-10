@@ -1,4 +1,7 @@
-
+*.icon-white {color: white}
+*.icon-silver {color: silver}
+*.icon-green {color: green}
+*.icon-dark {color: gray}
 
 body{
     background-color:#f9f9f9;
