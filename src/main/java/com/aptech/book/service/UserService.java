@@ -6,14 +6,20 @@ import com.aptech.book.exception.UserNotFoundException;
 import com.aptech.book.repository.RoleRepository;
 import com.aptech.book.repository.UserRepository;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageRequest;
+import org.springframework.data.domain.Pageable;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 
+import javax.transaction.Transactional;
 import java.util.List;
 import java.util.NoSuchElementException;
 
 @Service
+@Transactional
 public class UserService {
+    public static final int USERS_PER_PAGE = 4;
 
     @Autowired
     private UserRepository userRepo;
@@ -28,11 +34,16 @@ public class UserService {
         return (List<User>) userRepo.findAll();
     }
 
+    public Page<User> listByPage(int pageNum) {
+        Pageable pageable = PageRequest.of(pageNum - 1, USERS_PER_PAGE);
+        return userRepo.findAll(pageable);
+    }
+
     public List<Role> listRoles() {
         return (List<Role>) roleRepo.findAll();
     }
 
-    public void save(User user) {
+    public User save(User user) {
         boolean isUpdatingUser = (user.getId() != null);
 
         if (isUpdatingUser) {
@@ -47,6 +58,7 @@ public class UserService {
         } else {
             encodePassword(user);
         }
+        return userRepo.save(user);
     }
 
     private void encodePassword(User user) {
@@ -87,5 +99,9 @@ public class UserService {
         }
 
         userRepo.deleteById(id);
+    }
+
+    public void updateUserEnabledStatus(Integer id, boolean enabled) {
+        userRepo.updateEnabledStatus(id, enabled);
     }
 }
