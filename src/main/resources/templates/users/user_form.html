@@ -1,58 +1,9 @@
 <!DOCTYPE html>
 <html lang="en">
-<head>
-    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-    <meta name="viewport" content="width=device-width,initial-scale=1.0, minimum-scale=1.0">
-
-    <title>[[${pageTitle}]]</title>
-
-    <link rel="stylesheet" type="text/css" th:href="@{/webjars/bootstrap/css/bootstrap.min.css}"/>
-    <link rel="stylesheet" type="text/css" th:href="@{/css/style.css}"/>
-    <link rel="stylesheet" type="text/css" th:href="@{/fontawesome/all.css}"/>
-    <script type="text/javascript" th:src="@{/webjars/jquery/jquery.min.js}"></script>
-    <script type="text/javascript" th:src="@{/webjars/bootstrap/js/bootstrap.min.js}"></script>
-    <script type="text/javascript" th:src="@{/js/custom.js}"></script>
-</head>
+<head th:replace="fragments :: page_head('User Form - BookStore Admin')" />
 <body>
 
-<aside class="left-panel">
-
-    <div class="user text-center">
-        <img th:src="@{/images/user5.png}" class="img-circle" alt="...">
-        <h4 class="user-name mt-1">Akshay Kumar</h4>
-
-        <div class="dropdown user-login">
-            <button class="btn btn-xs dropdown-toggle btn-rounded" type="button" data-toggle="dropdown"
-                    aria-expanded="true">
-                Admin
-            </button>
-            <ul class="dropdown-menu" role="menu" aria-labelledby="dropdownMenu1">
-                <li role="presentation"><a role="menuitem" href="#"><i class="fa fa-circle status-icon signout"></i>
-                    Sign out</a></li>
-            </ul>
-        </div>
-    </div>
-
-
-    <nav class="navigation">
-        <ul class="list-unstyled">
-            <li class="active">
-                <a th:href="@{/}"><i class="fas fa-home"></i><span class="nav-label">Home</span></a>
-            </li>
-            <li class="has-submenu">
-                <a th:href="@{/templates/users}"><i class="fas fa-user-tie"></i> <span class="nav-label">Users</span></a>
-            </li>
-            <li class="has-submenu">
-                <a th:href="@{/categories}"><i class="fas fa-bars"></i> <span class="nav-label">Categories</span></a>
-            </li>
-            <li class="has-submenu">
-                <a th:href="@{/books}"><i class="fas fa-book"></i> <span class="nav-label">Books</span></a>
-            </li>
-        </ul>
-    </nav>
-
-</aside>
-<!-- Aside Ends-->
+<div th:replace="navigation :: menu"></div>
 
 <section class="content">
 
@@ -171,9 +122,7 @@
         </div>
     </div>
 
-    <footer class="container-fluid footer">
-        Copyright &copy; 2021 BookShop Control Panel</a>
-    </footer>
+    <div th:replace="fragments :: footer"></div>
 </section>
 <!-- Content Block Ends Here (right box)-->
 

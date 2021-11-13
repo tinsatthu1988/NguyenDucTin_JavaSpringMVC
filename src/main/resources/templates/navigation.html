@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org"
+      xmlns:sec="https://www.thymeleaf.org/thymeleaf-extras-springsecurity5">
+<body>
+<div th:fragment="menu">
+  <aside class="left-panel">
+    <form th:action="@{/logout}" method="post" th:hidden="true" name="logoutForm">
+      <input type="submit" />
+    </form>
+    <div class="user text-center">
+      <img th:src="@{${#authentication.getPrincipal().fullImage}}" class="img-fluid" alt="...">
+      <h4 class="user-name mt-1" sec:authentication="principal.fullname"></h4>
+
+      <div class="user-login">
+        <a href="" id="logoutLink" class="btn btn-xs btn-rounded" type="button">
+          Sign out
+        </a>
+      </div>
+    </div>
+
+
+    <nav class="navigation">
+      <ul class="list-unstyled">
+        <li class="active">
+          <a th:href="@{/}"><i class="fas fa-home"></i><span class="nav-label">Home</span></a>
+        </li>
+        <li class="has-submenu">
+          <a th:href="@{/users}"><i class="fas fa-user-tie"></i> <span class="nav-label">Users</span></a>
+        </li>
+        <li class="has-submenu">
+          <a th:href="@{/categories}"><i class="fas fa-bars"></i> <span class="nav-label">Categories</span></a>
+        </li>
+        <li class="has-submenu">
+          <a th:href="@{/books}"><i class="fas fa-book"></i> <span class="nav-label">Books</span></a>
+        </li>
+      </ul>
+    </nav>
+
+  </aside>
+  <!-- Aside Ends-->
+</div>
+</body>
+</html>
