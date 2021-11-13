@@ -8,8 +8,8 @@
       <input type="submit" />
     </form>
     <div class="user text-center">
-      <img th:src="@{${#authentication.getPrincipal().fullImage}}" class="img-fluid" alt="...">
-      <h4 class="user-name mt-1" sec:authentication="principal.fullname"></h4>
+      <img th:src="@{${#authentication.principal.fullImage}}" class="img-fluid" alt="...">
+      <h4 class="user-name mt-1" sec:authentication="principal.fullName"></h4>
 
       <div class="user-login">
         <a href="" id="logoutLink" class="btn btn-xs btn-rounded" type="button">
