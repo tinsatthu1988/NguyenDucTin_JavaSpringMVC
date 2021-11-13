@@ -1,5 +1,6 @@
 <!DOCTYPE html>
-<html lang="en">
+<html xmlns:th="http://www.thymeleaf.org"
+      xmlns:sec="https://www.thymeleaf.org/thymeleaf-extras-springsecurity5">
 <head>
     <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
     <meta name="viewport" content="width=device-width,initial-scale=1.0, minimum-scale=1.0">
@@ -16,20 +17,17 @@
 <body>
 
 <aside class="left-panel">
-
+    <form th:action="@{/logout}" method="post" th:hidden="true" name="logoutForm">
+        <input type="submit" />
+    </form>
     <div class="user text-center">
-        <img th:src="@{/images/user5.png}" class="img-circle" alt="...">
-        <h4 class="user-name mt-1">Akshay Kumar</h4>
+        <img th:src="@{${#authentication.getPrincipal().fullImage}}" class="img-circle" alt="...">
+        <h4 class="user-name mt-1" sec:authentication="principal.fullname"></h4>
 
-        <div class="dropdown user-login">
-            <button class="btn btn-xs dropdown-toggle btn-rounded" type="button" data-toggle="dropdown"
-                    aria-expanded="true">
-                Admin
-            </button>
-            <ul class="dropdown-menu" role="menu" aria-labelledby="dropdownMenu1">
-                <li role="presentation"><a role="menuitem" href="#"><i class="fa fa-circle status-icon signout"></i>
-                    Sign out</a></li>
-            </ul>
+        <div class="user-login">
+            <a href="" id="logoutLink" class="btn btn-xs btn-rounded" type="button">
+                Sign out
+            </a>
         </div>
     </div>
 
@@ -115,8 +113,14 @@
 
 </section>
 <!-- Content Block Ends Here (right box)-->
-
-
-
 </body>
+
+<script type="text/javascript">
+    $(document).ready(function() {
+        $("#logoutLink").on("click", function(e) {
+            e.preventDefault();
+            document.logoutForm.submit();
+        });
+    });
+</script>
 </html>
