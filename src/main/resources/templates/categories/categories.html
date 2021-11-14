@@ -50,7 +50,10 @@
                 <tr>
                     <th>ID</th>
                     <th>Category Image</th>
-                    <th>Category Name</th>
+                    <th>
+                        <a class="text-white" th:href="@{'/categories?sortDir=' + ${reverseSortDir}}">Category Name</a>
+                        <span th:class="${reverseSortDir == 'desc' ? 'fas fa-sort-up' : 'fas fa-sort-down'}" ></span>
+                    </th>
                     <th></th>
                 </tr>
                 </thead>
@@ -72,7 +75,20 @@
 
     <div style="height: 100px;"></div>
 
+    <div th:replace="modal_fragments :: confirm_modal" />
+
     <div th:replace="fragments :: footer"></div>
 </section>
 </body>
+<script th:src="@{/js/common_list.js}"></script>
+<script type="text/javascript">
+    moduleURL = "[[@{/categories}]]";
+
+    $(document).ready(function() {
+        $(".link-delete").on("click", function(e) {
+            e.preventDefault();
+            showDeleteConfirmModal($(this), 'category');
+        });
+    });
+</script>
 </html>

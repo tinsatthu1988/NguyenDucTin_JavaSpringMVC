@@ -4,6 +4,7 @@ import com.aptech.book.entity.Category;
 import com.aptech.book.exception.CategoryNotFoundException;
 import com.aptech.book.repository.CategoryRepository;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Sort;
 import org.springframework.stereotype.Service;
 
 import javax.transaction.Transactional;
@@ -16,8 +17,16 @@ public class CategoryService {
     @Autowired
     private CategoryRepository repo;
 
-    public List<Category> listAll() {
-        return (List<Category>) repo.findAll();
+    public List<Category> listAll(String sortDir) {
+        Sort sort = Sort.by("name");
+
+        if (sortDir.equals("asc")) {
+            sort = sort.ascending();
+        } else if (sortDir.equals("desc")) {
+            sort = sort.descending();
+        }
+
+        return repo.findAll();
     }
 
     public Category save(Category category) {
@@ -48,5 +57,14 @@ public class CategoryService {
         }
 
         return "OK";
+    }
+
+    public void delete(Integer id) throws CategoryNotFoundException {
+        Long countById = repo.countById(id);
+        if (countById == null || countById == 0) {
+            throw new CategoryNotFoundException("Could not find any category with ID " + id);
+        }
+
+        repo.deleteById(id);
     }
 }

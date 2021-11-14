@@ -58,7 +58,7 @@
   &nbsp;
   <a class="fas fa-trash fa-2x icon-dark link-delete"
      th:href="@{'/users/delete/' + ${user.id}}"
-     th:userId="${user.id}"
+     th:entityId="${user.id}"
      title="Delete this user"></a>
 </div>
 
@@ -74,7 +74,7 @@
   &nbsp;
   <a class="fas fa-trash fa-2x icon-dark link-delete"
      th:href="@{'/categories/delete/' + ${cat.id}}"
-     th:catId="${cat.id}"
+     th:entityId="${cat.id}"
      title="Delete this category"></a>
 </div>
 

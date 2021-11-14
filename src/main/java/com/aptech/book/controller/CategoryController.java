@@ -6,6 +6,7 @@ import com.aptech.book.exception.CategoryNotFoundException;
 import com.aptech.book.repository.CategoryRepository;
 import com.aptech.book.service.CategoryService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.repository.query.Param;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.util.StringUtils;
@@ -25,9 +26,17 @@ public class CategoryController {
     private CategoryService service;
 
     @GetMapping("/categories")
-    public String listAll(Model model) {
-        List<Category> listCategories = service.listAll();
+    public String listAll(@Param("sortDir") String sortDir, Model model) {
+        if (sortDir ==  null || sortDir.isEmpty()) {
+            sortDir = "asc";
+        }
+
+        List<Category> listCategories = service.listAll(sortDir);
+
+        String reverseSortDir = sortDir.equals("asc") ? "desc" : "asc";
+
         model.addAttribute("listCategories", listCategories);
+        model.addAttribute("reverseSortDir", reverseSortDir);
 
         return "categories/categories";
     }
@@ -77,5 +86,23 @@ public class CategoryController {
             ra.addFlashAttribute("message", ex.getMessage());
             return "redirect:/categories";
         }
+    }
+
+    @GetMapping("/categories/delete/{id}")
+    public String deleteCategory(@PathVariable(name = "id") Integer id,
+                                 Model model,
+                                 RedirectAttributes redirectAttributes) {
+        try {
+            service.delete(id);
+            String categoryDir = "category-images/" + id;
+            FileUploadUtil.removeDir(categoryDir);
+
+            redirectAttributes.addFlashAttribute("message",
+                    "The category ID " + id + " has been deleted successfully");
+        } catch (CategoryNotFoundException ex) {
+            redirectAttributes.addFlashAttribute("message", ex.getMessage());
+        }
+
+        return "redirect:/categories";
     }
 }
