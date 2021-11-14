@@ -12,7 +12,7 @@
         <img th:src="@{${#authentication.principal.fullImage}}" class="img-fluid" alt="...">
         <h4 class="user-name mt-1" sec:authentication="principal.fullName"></h4>
       </a>
-
+      <h6 sec:authentication="principal.authorities"></h6>
       <div class="user-login">
         <a href="" id="logoutLink" class="btn btn-xs btn-rounded" type="button">
           Sign out
@@ -26,15 +26,21 @@
         <li class="active">
           <a th:href="@{/}"><i class="fas fa-home"></i><span class="nav-label">Home</span></a>
         </li>
-        <li class="has-submenu">
+        <li class="has-submenu" sec:authorize="hasAuthority('Admin')">
           <a th:href="@{/users}"><i class="fas fa-user-tie"></i> <span class="nav-label">Users</span></a>
         </li>
-        <li class="has-submenu">
-          <a th:href="@{/categories}"><i class="fas fa-bars"></i> <span class="nav-label">Categories</span></a>
-        </li>
-        <li class="has-submenu">
-          <a th:href="@{/books}"><i class="fas fa-book"></i> <span class="nav-label">Books</span></a>
-        </li>
+
+        <th:block sec:authorize="hasAnyAuthority('Admin', 'Editor')">
+          <li class="has-submenu">
+            <a th:href="@{/categories}"><i class="fas fa-bars"></i> <span class="nav-label">Categories</span></a>
+          </li>
+        </th:block>
+
+        <th:block sec:authorize="hasAnyAuthority('Admin', 'Salesperson', 'Editor', 'Shipper')">
+          <li class="has-submenu">
+            <a th:href="@{/books}"><i class="fas fa-book"></i> <span class="nav-label">Books</span></a>
+          </li>
+        </th:block>
       </ul>
     </nav>
 
