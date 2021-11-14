@@ -42,17 +42,32 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
     protected void configure(HttpSecurity http) throws Exception {
         http.authorizeRequests()
                 .antMatchers("/users/**").hasAuthority("Admin")
-                .anyRequest().authenticated()
+
+                .antMatchers("/categories/**")
+                .hasAnyAuthority("Admin","Editor")
+
+                .antMatchers("/books/","/books")
+                .hasAnyAuthority("Admin","Editor","Shipper","Salesperson","Assistant")
+
+                .antMatchers("/books/new", "/books/edit", "/books/delete")
+                .hasAnyAuthority("Admin","Editor")
+
+                .antMatchers("/users","/categories","/books").authenticated()
+                .anyRequest().permitAll()
                 .and()
                 .formLogin()
                     .loginPage("/login")
+                    .defaultSuccessUrl("/index", true)
                     .usernameParameter("email")
                     .permitAll()
-                .and().logout().permitAll()
                 .and()
-                    .rememberMe()
-                        .key("AbcDefgHijKlmnOpqrs_1234567890")
-                        .tokenValiditySeconds(7 * 24 * 60 * 60);
+                .logout()
+                    .logoutSuccessUrl("/")
+                    .permitAll()
+                .and()
+                .rememberMe()
+                .key("1234567890_aBcDeFgHiJkLmNoPqRsTuVwXyZ")
+                .tokenValiditySeconds(14 * 24 * 60 * 60)
         ;
     }
 
