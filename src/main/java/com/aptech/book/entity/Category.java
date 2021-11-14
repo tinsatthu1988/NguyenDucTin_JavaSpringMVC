@@ -55,8 +55,20 @@ public class Category {
         this.books = books;
     }
 
+    public Category() {
+    }
+
+    public Category(String name) {
+        this.name = name;
+    }
+
+    public Category(String name, String image) {
+        this.name = name;
+        this.image = image;
+    }
+
     @Transient
-    public String getPhotosImagePath() {
+    public String getImagePath() {
         if (id == null || image == null) return "/images/image-thumbnail.png";
 
         return "/category-images/" + this.id + "/" + this.image;

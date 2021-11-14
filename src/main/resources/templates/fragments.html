@@ -64,7 +64,7 @@
 
 <div th:fragment="category_images" th:remove="tag">
   <span th:if="${cat.image == null}" class="fas fa-portrait fa-3x icon-silver"></span>
-  <img th:if="${cat.image != null}" th:src="@{${cat.photosImagePath}}"
+  <img th:if="${cat.image != null}" th:src="@{${cat.imagePath}}"
        style="width: 70px" />
 </div>
 
