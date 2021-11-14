@@ -48,12 +48,9 @@
             <table class="table table-bordered table-striped table-hover table-responsive-xl">
                 <thead class="thead-dark">
                 <tr>
-                    <th>ID</th>
+                    <th th:replace="fragments :: column_link('/categories', 'id', 'Category ID', 'none')" />
                     <th>Category Image</th>
-                    <th>
-                        <a class="text-white" th:href="@{'/categories?sortDir=' + ${reverseSortDir}}">Category Name</a>
-                        <span th:class="${reverseSortDir == 'desc' ? 'fas fa-sort-up' : 'fas fa-sort-down'}" ></span>
-                    </th>
+                    <th th:replace="fragments :: column_link('/categories', 'name', 'Category Name', 'none')" />
                     <th></th>
                 </tr>
                 </thead>
@@ -61,7 +58,7 @@
                 <tr th:each="cat : ${listCategories}">
                     <td>[[${cat.id}]]</td>
                     <td>
-                        <div th:replace="fragments :: category_images" />
+                        <div th:replace="fragments :: category_images"/>
                     </td>
                     <td>[[${cat.name}]]</td>
                     <td>
@@ -71,11 +68,13 @@
                 </tbody>
             </table>
         </div>
+
+        <div th:replace="fragments :: pagination('/categories', 'categories')"></div>
     </div>
 
     <div style="height: 100px;"></div>
 
-    <div th:replace="modal_fragments :: confirm_modal" />
+    <div th:replace="modal_fragments :: confirm_modal"/>
 
     <div th:replace="fragments :: footer"></div>
 </section>
@@ -84,8 +83,8 @@
 <script type="text/javascript">
     moduleURL = "[[@{/categories}]]";
 
-    $(document).ready(function() {
-        $(".link-delete").on("click", function(e) {
+    $(document).ready(function () {
+        $(".link-delete").on("click", function (e) {
             e.preventDefault();
             showDeleteConfirmModal($(this), 'category');
         });

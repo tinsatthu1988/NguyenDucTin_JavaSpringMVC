@@ -30,13 +30,11 @@
           <a th:href="@{/users}"><i class="fas fa-user-tie"></i> <span class="nav-label">Users</span></a>
         </li>
 
-        <li class="has-submenu" sec:authorize="hasAuthority('Admin')">
-          <a th:href="@{/brands/new}"><i class="fas fa-user-tie"></i> <span class="nav-label">Brands</span></a>
-        </li>
-
-        <li class="has-submenu" sec:authorize="hasAuthority('Admin')">
-          <a th:href="@{/categories}"><i class="fas fa-user-tie"></i> <span class="nav-label">Categories</span></a>
-        </li>
+        <th:block sec:authorize="hasAnyAuthority('Admin', 'Editor')">
+          <li class="has-submenu">
+            <a th:href="@{/categories}"><i class="fas fa-user-tie"></i> <span class="nav-label">Categories</span></a>
+          </li>
+        </th:block>
 
         <th:block sec:authorize="hasAnyAuthority('Admin', 'Salesperson', 'Editor', 'Shipper')">
           <li class="has-submenu">

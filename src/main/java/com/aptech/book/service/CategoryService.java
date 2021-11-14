@@ -4,6 +4,9 @@ import com.aptech.book.entity.Category;
 import com.aptech.book.exception.CategoryNotFoundException;
 import com.aptech.book.repository.CategoryRepository;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageRequest;
+import org.springframework.data.domain.Pageable;
 import org.springframework.data.domain.Sort;
 import org.springframework.stereotype.Service;
 
@@ -14,19 +17,27 @@ import java.util.NoSuchElementException;
 @Service
 @Transactional
 public class CategoryService {
+    public static final int CATEGORIES_PER_PAGE = 4;
+
     @Autowired
     private CategoryRepository repo;
 
-    public List<Category> listAll(String sortDir) {
-        Sort sort = Sort.by("name");
+    public List<Category> listAll() {
+        return (List<Category>) repo.findAll();
+    }
 
-        if (sortDir.equals("asc")) {
-            sort = sort.ascending();
-        } else if (sortDir.equals("desc")) {
-            sort = sort.descending();
+    public Page<Category> listByPage(int pageNum, String sortField, String sortDir, String keyword){
+        Sort sort = Sort.by(sortField);
+
+        sort = sortDir.equals("asc") ? sort.ascending() : sort.descending();
+
+        Pageable pageable = PageRequest.of(pageNum - 1, CATEGORIES_PER_PAGE, sort);
+
+        if(keyword != null) {
+            return repo.findAll(keyword, pageable);
         }
 
-        return repo.findAll();
+        return repo.findAll(pageable);
     }
 
     public Category save(Category category) {
