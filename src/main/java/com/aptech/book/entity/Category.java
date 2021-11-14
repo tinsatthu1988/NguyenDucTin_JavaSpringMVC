@@ -17,6 +17,9 @@ public class Category {
     @Column(name = "name", nullable = false, length = 30)
     private String name;
 
+    @Column(length = 128, nullable = false)
+    private String image;
+
     @OneToMany(cascade = CascadeType.ALL, mappedBy = "category")
     private List<Book> books;
 
@@ -34,5 +37,28 @@ public class Category {
 
     public void setName(String name) {
         this.name = name;
+    }
+
+    public String getImage() {
+        return image;
+    }
+
+    public void setImage(String image) {
+        this.image = image;
+    }
+
+    public List<Book> getBooks() {
+        return books;
+    }
+
+    public void setBooks(List<Book> books) {
+        this.books = books;
+    }
+
+    @Transient
+    public String getPhotosImagePath() {
+        if (id == null || image == null) return "/images/image-thumbnail.png";
+
+        return "/category-images/" + this.id + "/" + this.image;
     }
 }

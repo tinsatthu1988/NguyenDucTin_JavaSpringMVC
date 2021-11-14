@@ -62,5 +62,21 @@
      title="Delete this user"></a>
 </div>
 
+<div th:fragment="category_images" th:remove="tag">
+  <span th:if="${cat.image == null}" class="fas fa-portrait fa-3x icon-silver"></span>
+  <img th:if="${cat.image != null}" th:src="@{${cat.photosImagePath}}"
+       style="width: 70px" />
+</div>
+
+<div th:fragment="category_actions" th:remove="tag">
+  <a class="fas fa-edit fa-2x icon-green" th:href="@{'/categories/edit/' + ${cat.id}}"
+     title="Edit this category"></a>
+  &nbsp;
+  <a class="fas fa-trash fa-2x icon-dark link-delete"
+     th:href="@{'/categories/delete/' + ${cat.id}}"
+     th:catId="${cat.id}"
+     title="Delete this category"></a>
+</div>
+
 </body>
 </html>
