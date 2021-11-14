@@ -2,14 +2,16 @@
 <html xmlns:th="http://www.thymeleaf.org"
       xmlns:sec="https://www.thymeleaf.org/thymeleaf-extras-springsecurity5">
 <body>
-<div th:fragment="menu">
+<div th:fragment="menu" th:remove="tag">
   <aside class="left-panel">
     <form th:action="@{/logout}" method="post" th:hidden="true" name="logoutForm">
       <input type="submit" />
     </form>
     <div class="user text-center">
-      <img th:src="@{${#authentication.principal.fullImage}}" class="img-fluid" alt="...">
-      <h4 class="user-name mt-1" sec:authentication="principal.fullName"></h4>
+      <a th:href="@{/account}">
+        <img th:src="@{${#authentication.principal.fullImage}}" class="img-fluid" alt="...">
+        <h4 class="user-name mt-1" sec:authentication="principal.fullName"></h4>
+      </a>
 
       <div class="user-login">
         <a href="" id="logoutLink" class="btn btn-xs btn-rounded" type="button">
