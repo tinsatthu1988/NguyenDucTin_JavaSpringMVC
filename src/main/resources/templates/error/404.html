@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org"
+      xmlns:sec="https://www.thymeleaf.org/thymeleaf-extras-springsecurity5">
+<head th:replace="fragments :: page_head('Error - BookStore Admin')" />
+</head>
+<body>
+<div th:replace="navigation :: menu"></div>
+
+<section class="content">
+
+  <header class="top-head container-fluid">
+    <div type="button" class="navbar-toggle">
+      <i class="fas fa-bars"></i>
+    </div>
+
+  </header>
+  <!-- Header Ends -->
+
+  <div class="warper container-fluid text-center">
+    <div>
+      <img th:src="@{/images/login.png}" />
+    </div>
+    <div class="m-3">
+      <h2>Sorry, the requested page could not be found</h2>
+    </div>
+  </div>
+</section>
+</body>
+</html>
