@@ -3,7 +3,6 @@ package com.aptech.book.controller;
 import com.aptech.book.FileUploadUtil;
 import com.aptech.book.entity.Category;
 import com.aptech.book.exception.CategoryNotFoundException;
-import com.aptech.book.repository.CategoryRepository;
 import com.aptech.book.service.CategoryService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.repository.query.Param;
@@ -23,7 +22,7 @@ import java.util.List;
 @Controller
 public class CategoryController {
     @Autowired
-    private CategoryService service;
+    private CategoryService categoryService;
 
     @GetMapping("/categories")
     public String listAll(@Param("sortDir") String sortDir, Model model) {
@@ -31,7 +30,7 @@ public class CategoryController {
             sortDir = "asc";
         }
 
-        List<Category> listCategories = service.listAll(sortDir);
+        List<Category> listCategories = categoryService.listAll(sortDir);
 
         String reverseSortDir = sortDir.equals("asc") ? "desc" : "asc";
 
@@ -58,25 +57,26 @@ public class CategoryController {
             String fileName = StringUtils.cleanPath(multipartFile.getOriginalFilename());
             category.setImage(fileName);
 
-            Category savedCategory = service.save(category);
+            Category savedCategory = categoryService.save(category);
             String uploadDir = "category-images/" + savedCategory.getId();
 
             FileUploadUtil.cleanDir(uploadDir);
             FileUploadUtil.saveFile(uploadDir, fileName, multipartFile);
         } else {
-            service.save(category);
+            categoryService.save(category);
         }
-        System.out.println("save successfully");
 
         ra.addFlashAttribute("message", "The category has been saved successfully.");
         return "redirect:/categories";
     }
 
+
+
     @GetMapping("/categories/edit/{id}")
     public String editCategory(@PathVariable(name = "id") Integer id, Model model,
                                RedirectAttributes ra) {
         try {
-            Category category = service.get(id);
+            Category category = categoryService.get(id);
 
             model.addAttribute("category", category);
             model.addAttribute("pageTitle", "Edit Category (ID: " + id + ")");
@@ -93,7 +93,7 @@ public class CategoryController {
                                  Model model,
                                  RedirectAttributes redirectAttributes) {
         try {
-            service.delete(id);
+            categoryService.delete(id);
             String categoryDir = "category-images/" + id;
             FileUploadUtil.removeDir(categoryDir);
 

@@ -18,9 +18,6 @@ public class CategoryRepositoryTests {
 
     @Test
     public void testCreateCategory(){
-        Category category = new Category("Travel","travel.jpg");
-        Category savedCategory = repo.save(category);
 
-        assertThat(savedCategory.getId()).isGreaterThan(0);
     }
 }
