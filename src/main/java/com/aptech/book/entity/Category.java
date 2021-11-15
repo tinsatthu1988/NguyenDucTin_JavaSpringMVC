@@ -18,6 +18,8 @@ public class Category {
 
     private String image;
 
+//    @OneToMany(cascade = CascadeType.ALL, mappedBy = "category")
+//    private List<Book> books;
 
     public Integer getId() {
         return id;
@@ -42,6 +44,14 @@ public class Category {
     public void setImage(String image) {
         this.image = image;
     }
+
+//    public List<Book> getBooks() {
+//        return books;
+//    }
+//
+//    public void setBooks(List<Book> books) {
+//        this.books = books;
+//    }
 
     public Category() {
     }

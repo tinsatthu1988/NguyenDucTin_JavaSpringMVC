@@ -9,6 +9,7 @@
   <link rel="stylesheet" type="text/css" th:href="@{/webjars/bootstrap/css/bootstrap.min.css}"/>
   <link rel="stylesheet" type="text/css" th:href="@{/css/style.css}"/>
   <link rel="stylesheet" type="text/css" th:href="@{/fontawesome/all.css}"/>
+
   <script type="text/javascript" th:src="@{/webjars/jquery/jquery.min.js}"></script>
   <script type="text/javascript" th:src="@{/webjars/bootstrap/js/bootstrap.min.js}"></script>
   <script type="text/javascript" th:src="@{/js/custom.js}"></script>
@@ -76,6 +77,22 @@
      th:href="@{'/categories/delete/' + ${cat.id}}"
      th:entityId="${cat.id}"
      title="Delete this category"></a>
+</div>
+
+<div th:fragment="book_images" th:remove="tag">
+  <span th:if="${book.imageName == null}" class="fas fa-portrait fa-3x icon-silver"></span>
+  <img th:if="${book.imageName != null}" th:src="@{${book.imagePath}}"
+       style="width: 70px" />
+</div>
+
+<div th:fragment="book_actions" th:remove="tag">
+  <a class="fas fa-edit fa-2x icon-green" th:href="@{'/books/edit/' + ${book.id}}"
+     title="Edit this book"></a>
+  &nbsp;
+  <a class="fas fa-trash fa-2x icon-dark link-delete"
+     th:href="@{'/books/delete/' + ${book.id}}"
+     th:entityId="${book.id}"
+     title="Delete this book"></a>
 </div>
 
 <div th:fragment="pagination(moduleURL, entityName)" th:remove="tag">
