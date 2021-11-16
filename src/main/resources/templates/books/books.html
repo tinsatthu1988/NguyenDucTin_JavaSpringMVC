@@ -48,11 +48,11 @@
       <table class="table table-bordered table-striped table-hover table-responsive-xl">
         <thead class="thead-dark">
         <tr>
-          <th>ID</th>
+          <th th:replace="fragments :: column_link('/books', 'id', 'Book ID', 'none')" />
           <th>Image</th>
-          <th>Title</th>
-          <th>Author</th>
-          <th>Category</th>
+          <th th:replace="fragments :: column_link('/books', 'title', 'Title', 'none')" />
+          <th th:replace="fragments :: column_link('/books', 'author', 'Author', 'none')" />
+          <th th:replace="fragments :: column_link('/books', 'category.name', 'Category', 'none')" />
           <th>Price</th>
           <th></th>
         </tr>
