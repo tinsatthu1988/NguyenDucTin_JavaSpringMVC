@@ -124,6 +124,32 @@
     $("#description").richText();
 
   });
+
+  function checkUnique(form) {
+    bookId = $("#id").val();
+    bookTitle = $("#title").val();
+
+    csrfValue = $("input[name='_csrf']").val();
+
+    url = "[[@{/books/check_unique}]]";
+
+    params = {id: bookId, title: bookTitle, _csrf: csrfValue};
+
+    $.post(url, params, function(response) {
+      if (response == "OK") {
+        form.submit();
+      } else if (response == "DuplicateTitle") {
+        showWarningModal("There is another book having same title " + bookTitle);
+      } else {
+        showErrorModal("Unknown response from server");
+      }
+
+    }).fail(function() {
+      showErrorModal("Could not connect to the server");
+    });
+
+    return false;
+  }
 </script>
 <script th:src="@{/js/common_form.js}"></script>
 </body>
