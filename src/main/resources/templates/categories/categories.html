@@ -31,6 +31,8 @@
 
         <div>
             <form th:action="@{/categories/page/1}" class="form-inline m-3">
+                <input type="hidden" name="sortField" th:value="${sortField}"/>
+                <input type="hidden" name="sortDir" th:value="${sortDir}"/>
                 Filter:&nbsp;
                 <input type="search" name="keyword" th:value="${keyword}" class="form-control" required/>
                 &nbsp;&nbsp;
