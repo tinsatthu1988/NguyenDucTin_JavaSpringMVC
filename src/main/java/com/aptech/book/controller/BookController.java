@@ -3,6 +3,8 @@ package com.aptech.book.controller;
 import com.aptech.book.FileUploadUtil;
 import com.aptech.book.entity.Book;
 import com.aptech.book.entity.Category;
+import com.aptech.book.exception.BookNotFoundException;
+import com.aptech.book.exception.CategoryNotFoundException;
 import com.aptech.book.service.BookService;
 import com.aptech.book.service.CategoryService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -10,6 +12,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.util.StringUtils;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.multipart.MultipartFile;
@@ -65,5 +68,23 @@ public class BookController {
 
         ra.addFlashAttribute("message", "The book has been saved successfully.");
         return "redirect:/books";
+    }
+
+    @GetMapping("/books/edit/{id}")
+    public String editBook(@PathVariable(name = "id") Integer id, Model model,
+                               RedirectAttributes ra) {
+        try {
+            Book book = bookService.get(id);
+            List<Category> listCategories = categoryService.listAll();
+
+            model.addAttribute("book", book);
+            model.addAttribute("listCategories", listCategories);
+            model.addAttribute("pageTitle", "Edit Book (ID: " + id + ")");
+
+            return "books/book_form";
+        } catch (BookNotFoundException ex) {
+            ra.addFlashAttribute("message", ex.getMessage());
+            return "redirect:/books";
+        }
     }
 }
