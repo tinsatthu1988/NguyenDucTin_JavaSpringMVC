@@ -50,31 +50,52 @@
       <table class="table table-bordered table-striped table-hover table-responsive-xl">
         <thead class="thead-dark">
         <tr>
-          <th th:replace="fragments :: column_link('/books', 'id', 'Book ID', 'none')" />
+          <th class="hideable-column">
+            <th th:replace="fragments :: column_link('/books', 'id', 'Book ID', 'tag')" />
+          </th>
           <th>Image</th>
           <th th:replace="fragments :: column_link('/books', 'title', 'Title', 'none')" />
           <th th:replace="fragments :: column_link('/books', 'author', 'Author', 'none')" />
-          <th th:replace="fragments :: column_link('/books', 'category.name', 'Category', 'none')" />
-          <th>Price</th>
+          <th class="hideable-column">
+            <th th:replace="fragments :: column_link('/books', 'category.name', 'Category', 'tag')" />
+          </th>
+          <th th:replace="fragments :: column_link('/books', 'price', 'Price', 'none')" />
           <th></th>
         </tr>
         </thead>
         <tbody>
         <tr th:each="book : ${listBooks}">
-          <td>[[${book.id}]]</td>
+          <td class="hideable-column">[[${book.id}]]</td>
           <td>
             <div th:replace="fragments :: book_images"/>
           </td>
           <td>[[${book.title}]]</td>
           <td>[[${book.author}]]</td>
-          <td>[[${book.category.name}]]</td>
-          <td>[[${book.price}]]</td>
+          <td class="hideable-column">[[${book.category.name}]]</td>
+          <td>$[[${book.price}]]</td>
           <td>
             <div th:replace="fragments :: book_actions"/>
           </td>
         </tr>
         </tbody>
       </table>
+    </div>
+
+    <div class="less-details">
+      <div th:each="book : ${listBooks}" class="row m-1">
+        <div class="col-4">
+          <div th:replace="fragments :: book_images"/>
+        </div>
+        <div class="col-8">
+          <div><b>[[${book.title}]]</b></div>
+          <div><i>by </i>[[${book.author}]]</div>
+          <div>$[[${book.price}]]</div>
+          <div class="mt-2">
+            <div th:replace="fragments :: book_actions"/>
+          </div>
+        </div>
+        <div>&nbsp;</div>
+      </div>
     </div>
 
     <div th:replace="fragments :: pagination('/books', 'books')"></div>
