@@ -39,15 +39,14 @@
                     </li>
                     <li class="nav-item dropdown">
                         <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                            Content Management
+                            Category
                         </a>
                         <div class="dropdown-menu" aria-labelledby="navbarDropdown">
-                            <a class="dropdown-item" asp-action="Index">Category</a>
-                            <a class="dropdown-item" asp-action="Index">Book</a>
+                            <th:block th:each="cat : ${listCategories}">
+                                <a href="" class="dropdown-item">[[${cat.name}]]</a>
+                            </th:block>
+
                         </div>
-                    </li>
-                    <li class="nav-item">
-                        <a class="nav-link">User</a>
                     </li>
                     <li class="nav-item">
                         <a class="nav-link">Orders History</a>
@@ -58,9 +57,9 @@
                         </a>
                     </li>
                     <li>
-                        <form action="" method="post">
+                        <form th:action="@{/page/1}">
                             <div class="input-group">
-                                <input type="text" class="form-control" placeholder="Search...." aria-label="Recipient's username" name="postTitle" aria-describedby="basic-addon2" id="postTitle">
+                                <input type="search" name="keyword" th:value="${keyword}" class="form-control" placeholder="Search....">
                                 <div class="input-group-append">
                                     <button class="btn btn-primary" type="submit"><i class="fas fa-search"></i></button>
                                 </div>
@@ -121,6 +120,8 @@
             </div>
         </th:block>
     </div>
+
+    <div th:replace="fragments :: pagination('/home', 'books')"></div>
 </div>
 <div class="py-4 bg-light">
     <div class="container">
@@ -160,7 +161,7 @@
                 <hr />
                 <ul style="display:block;list-style:none;padding-left:0px;">
                     <li class="py-1"><a href="" class="text-muted">Hotline: 1900 6656</a></li>
-                    <li class="py-1"><a href="" class="text-muted">Email:hotro@aptechstore.com</a></li>
+                    <li class="py-1"><a href="" class="text-muted">Email:hotro@bookstore.com</a></li>
                     <li class="py-1">
                         <a href="https://www.facebook.com/nhasachphuongnam" class="facebook" target="_blank"><i class="fab fa-facebook-square" style="font-size:30px"></i></a>
                         <a href="https://www.youtube.com/channel/UCfKPeM9cAbB5LxKSeth8Vjg" class="youtube" target="_blank"><i class="fab fa-youtube" style="font-size:30px"></i></a>
