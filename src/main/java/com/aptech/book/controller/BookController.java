@@ -68,6 +68,8 @@ public class BookController {
         return "books/books";
     }
 
+
+
     @GetMapping("/books/new")
     public String newBook(Model model) {
         List<Category> listCategories = categoryService.listAll();

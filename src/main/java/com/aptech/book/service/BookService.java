@@ -26,6 +26,17 @@ public class BookService {
         return (List<Book>) repo.findAll();
     }
 
+    public Page<Book> listByPage(int pageNum, String keyword){
+
+        Pageable pageable = PageRequest.of(pageNum - 1, BOOKS_PER_PAGE);
+
+        if(keyword != null) {
+            return repo.findAll(keyword, pageable);
+        }
+
+        return repo.findAll(pageable);
+    }
+
     public Page<Book> listByPage(int pageNum, String sortField, String sortDir, String keyword){
         Sort sort = Sort.by(sortField);
 

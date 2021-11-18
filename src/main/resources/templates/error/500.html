@@ -4,19 +4,8 @@
 <head th:replace="fragments :: page_head('Error - BookStore Admin')" />
 </head>
 <body>
-<div th:replace="navigation :: menu"></div>
 
-<section class="content">
-
-  <header class="top-head container-fluid">
-    <div type="button" class="navbar-toggle">
-      <i class="fas fa-bars"></i>
-    </div>
-
-  </header>
-  <!-- Header Ends -->
-
-  <div class="warper container-fluid text-center">
+  <div class="text-center">
     <div>
       <img th:src="@{/images/login.png}" />
     </div>
@@ -24,6 +13,6 @@
       <h2>Sorry, the server has encountered an error while processing your request</h2>
     </div>
   </div>
-</section>
+
 </body>
 </html>
